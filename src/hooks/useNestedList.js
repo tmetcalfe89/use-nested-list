@@ -33,10 +33,7 @@ const changeTypes = {
  * @requires useState
  * @author Timothy Metcalfe
  */
-export default function useNestedList(
-  defaultValue = [],
-  { unique = true } = {}
-) {
+function useNestedList(defaultValue = [], { unique = true } = {}) {
   const [nestedList, setNestedList] = useState(defaultValue);
 
   /**
@@ -46,6 +43,7 @@ export default function useNestedList(
    * @param {string[]} path The path to travel along.
    * @returns {Group|Entry} The resultant Group/Entry.
    * @throws Will throw an error if provided with an invalid path.
+   * @private
    */
   const travelPath = (list, path) => {
     let pointer = list;
@@ -191,7 +189,7 @@ export default function useNestedList(
   /**
    * Gets a Group/Entry at a given path.
    *
-   * @param {string[]} path The path fo the Group/Entry.
+   * @param {string[]} path The path for the Group/Entry.
    * @returns The Group/Entry at the given path.
    * @throws Will throw an error if an invalid path is provided.
    */
@@ -215,3 +213,7 @@ export default function useNestedList(
     removeEntry,
   };
 }
+
+export default useNestedList;
+
+export { errors, changeTypes };
